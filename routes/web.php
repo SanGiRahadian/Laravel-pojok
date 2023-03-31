@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController; // untuk mendaftarkan user controler
+use App\Http\Controllers\PositionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,7 @@ use App\Http\Controllers\UserController; // untuk mendaftarkan user controler
 |
 */
 //untuk mendftrkan link website
+
 
 Route::get('register', [UserController::class, 'register'])->name('register');
 Route::post('register', [UserController::class, 'register_action'])->name('register.action');
@@ -28,4 +30,6 @@ Route::middleware('auth')->group(
     Route::get('password', [UserController::class, 'password'])->name('password');
     Route::post('password', [UserController::class, 'password_action'])->name('password.action');
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
+    //route position
+    Route::resource('positions', PositionController::class);
 });
