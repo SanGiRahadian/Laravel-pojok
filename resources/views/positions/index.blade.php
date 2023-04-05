@@ -12,7 +12,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">Id</th>
       <th scope="col">Nama</th>
       <th scope="col">Keterangan</th>
       <th scope="col">Alias</th>

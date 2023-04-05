@@ -1,7 +1,16 @@
-@extends('layout')
+
+<!-- navbar -->
+<nav class="navbar navbar-dark bg-primary mb-4">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1 ">LARAVEL RUMAH SAKIT</span>
+      </div>
+    </nav>
+    <!-- akhir navbar -->@extends('layout')
 @section('content')
+<div class="container">
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
+        <div class="wrapper bg-white text-center p-3">
         @if($errors->any())
         @foreach($errors->all() as $err)
         <p class="alert alert-danger">{{ $err }}</p>
@@ -30,6 +39,9 @@
                 <a class="btn btn-danger" href="{{ route('home') }}">Back</a>
             </div>
         </form>
+        <a class="nav-link" href="/login">Sudah punya akun? Login sekarang</a>
+        </div>
     </div>
+</div>
 </div>
 @endsection

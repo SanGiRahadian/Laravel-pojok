@@ -1,7 +1,16 @@
+<!-- navbar -->
+<nav class="navbar navbar-dark bg-primary mb-4">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">LARAVEL RUMAH SAKIT</span>
+      </div>
+    </nav>
+    <!-- akhir navbar -->
+
 @extends('layout')
 @section('content')
-<div class="row">
-    <div class="col-md-6">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
         @if(session('success'))
         <p class="alert alert-success">{{ session('success') }}</p>
         @endif
@@ -25,6 +34,8 @@
                 <a class="btn btn-danger" href="{{ route('home') }}">Back</a>
             </div>
         </form>
+        <a class="nav-link" href="/register">Belum punya akun? Register sekarang</a>
+            </div>
     </div>
 </div>
 @endsection
