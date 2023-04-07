@@ -8,9 +8,10 @@
 
 @extends('layout')
 @section('content')
-<div class="container">
+<div class="container" >
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
+        <div class="wrapper bg-white text-center p-12">
         @if(session('success'))
         <p class="alert alert-success">{{ session('success') }}</p>
         @endif
@@ -20,7 +21,24 @@
         @endforeach
         @endif
         <form action="{{ route('login.action') }}" method="POST">
-            @csrf
+                        @csrf
+                        @if(session('register'))
+                        <div class="alert alert-success my-4">
+                            {{session('register')}}
+                        </div>
+                        @endif
+                        
+                        @if(session('email'))
+                        <div class="alert alert-danger my-4">
+                            {{session('email')}}
+                            </div>
+                        @endif
+                        
+                        @if(session('password'))
+                        <div class="alert alert-danger my-4">
+                            {{session('password')}}
+                        </div>
+                        @endif
             <div class="mb-3">
                 <label>Email <span class="text-danger">*</span></label>
                 <input class="form-control" type="email" name="email" value="{{ old('email') }}" />
@@ -29,13 +47,22 @@
                 <label>Password <span class="text-danger">*</span></label>
                 <input class="form-control" type="password" name="password" />
             </div>
-            <div class="mb-3">
-                <button class="btn btn-primary">Login</button>
+            <div class="d-block mb-3">
+                            <button type="submit" class="btn btn-success -block">Login</button>
                 <a class="btn btn-danger" href="{{ route('home') }}">Back</a>
             </div>
-        </form>
-        <a class="nav-link" href="/register">Belum punya akun? Register sekarang</a>
+            <div>
+        <p >Belum punya akun? <a class="nav-link"  style="color:blue" href="/register">Register</a></p> 
             </div>
+        </form>
+        </div>
+        </div>
     </div>
 </div>
+
+<!-- content -->
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+
 @endsection

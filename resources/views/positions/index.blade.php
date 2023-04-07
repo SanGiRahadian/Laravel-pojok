@@ -7,9 +7,16 @@
   </div>
 @endif
 <div class="text-end mb-2">
-                    <a class="btn btn-success" href="{{ route('positions.create') }}"> Add position</a>
-                </div>
-<table class="table">
+<form method="post" action="/index">
+                        @csrf
+							        <div class="input-group mb-4">
+							            <input type="text" placeholder="Cari Nama Position..." required class="form-control" name="keyword">
+							            <button type="submit" class="btn btn-primary">Cari</button>
+							        </div>
+							    </form>
+<a class="btn btn-success" href="{{ route('positions.create') }}"> Add position</a>
+</div>
+<table class="table table-striped mg-b-0 text-md-nowrap border">
   <thead>
     <tr>
       <th scope="col">Id</th>
