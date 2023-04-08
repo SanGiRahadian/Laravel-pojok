@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('location');
+            $table->integer('manager_id');
             $table->timestamps();
         });
     }
