@@ -28,11 +28,11 @@
                 <option selected>Choose...</option>
                 <option value="0" <?php if (!empty($_GET['id'])) {
                                         if ($usr['manager_id'] == 0) {
-                                            echo "selected";
+                                            echo "User";
                                         } else {
                                             echo "";
                                         }
-                                    } ?>>1</option>
+                                    } ?>>User</option>
             </select>
             <button type="submit" class="btn btn-primary mt-3 ml-3">Submit</button>
         </div>
