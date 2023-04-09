@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController; // untuk mendaftarkan user controler
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\DepartementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,6 @@ Route::middleware('auth')->group(
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
     //route position
     Route::resource('positions', PositionController::class);
+    //route departement
+    Route::resource('departements', DepartementController::class);
 });

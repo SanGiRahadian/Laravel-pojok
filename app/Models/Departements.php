@@ -10,6 +10,7 @@ class Departements extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'location'
+        'location',
+        'manager_id'
     ];
 }

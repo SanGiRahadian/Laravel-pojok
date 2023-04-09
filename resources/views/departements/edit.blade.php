@@ -1,13 +1,13 @@
 @extends('app')
 @section('content')
-<form action="{{ route('positions.update',$position->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('departements.update',$departement->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
-    <div class="row row-sm">
+    <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Position Name:</strong>
-                <input type="text" name="name" value="{{ $position->name }}" class="form-control" placeholder="Position name">
+                <strong>Departement Name:</strong>
+                <input type="text" name="name" value="{{ $departement->name }}" class="form-control" placeholder="Departement name">
                 @error('name')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -15,23 +15,26 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Keterangan:</strong>
-                <input type="keterangan" name="keterangan" class="form-control" placeholder="keterangan" value="{{ $position->keterangan }}">
-                @error('keterangan')
+                <strong>Location :</strong>
+                <input type="location" name="location" class="form-control" placeholder="location" value="{{ $departement->location }}">
+                @error('location')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Singkatan:</strong>
-                <input type="text" name="alias" value="{{ $position->alias }}" class="form-control" placeholder="alias">
-                @error('alias')
-                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                @enderror
-            </div>
+            <label for="manager_id" class="form-label">Manager Id</label>
+            <select id="manager_id" name="manager_id" class="form-select">
+                <option selected>Choose...</option>
+                <option value="0" <?php if (!empty($_GET['id'])) {
+                                        if ($usr['manager_id'] == 0) {
+                                            echo "selected";
+                                        } else {
+                                            echo "";
+                                        }
+                                    } ?>>1</option>
+            </select>
+            <button type="submit" class="btn btn-primary mt-3 ml-3">Submit</button>
         </div>
-        <button type="submit" class="btn btn-primary mt-3 ml-3">Save</button>
-    </div>
 </form>
 @endsection
