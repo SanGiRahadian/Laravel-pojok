@@ -8,10 +8,8 @@
 
 @extends('layout')
 @section('content')
-<div class="container" >
-    <div class="row">
-        <div class="col-md-6">
-        <div class="wrapper bg-white text-center p-12">
+<div class="row justify-content-center">
+    <div class="col-md-6">
         @if(session('success'))
         <p class="alert alert-success">{{ session('success') }}</p>
         @endif
@@ -21,42 +19,22 @@
         @endforeach
         @endif
         <form action="{{ route('login.action') }}" method="POST">
-                        @csrf
-                        @if(session('register'))
-                        <div class="alert alert-success my-4">
-                            {{session('register')}}
-                        </div>
-                        @endif
-                        
-                        @if(session('email'))
-                        <div class="alert alert-danger my-4">
-                            {{session('email')}}
-                            </div>
-                        @endif
-                        
-                        @if(session('password'))
-                        <div class="alert alert-danger my-4">
-                            {{session('password')}}
-                        </div>
-                        @endif
+            @csrf
             <div class="mb-3">
-                <label>Email <span class="text-danger">*</span></label>
-                <input class="form-control" type="email" name="email" value="{{ old('email') }}" />
+                <label>email <span class="text-danger">*</span></label>
+                <input class="form-control" type="email" name="email" value="{{ old('email') }}" required/>
             </div>
             <div class="mb-3">
                 <label>Password <span class="text-danger">*</span></label>
-                <input class="form-control" type="password" name="password" />
+                <input class="form-control" type="password" name="password" required/>
             </div>
-            <div class="d-block mb-3">
-                            <button type="submit" class="btn btn-success -block">Login</button>
-                <a class="btn btn-danger" href="{{ route('home') }}">Back</a>
+            <div class="mb-3">
+                <button class="btn btn-primary">Login</button>
             </div>
             <div>
-        <p >Belum punya akun? <a class="nav-link"  style="color:blue" href="/register">Register</a></p> 
+            <p>Anda belum memiliki akun ? <a href="{{ route('register') }}">Register</a> Sekarang !</p>
             </div>
         </form>
-        </div>
-        </div>
     </div>
 </div>
 

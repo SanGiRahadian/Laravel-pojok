@@ -4,33 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Models\Departements;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class DepartementController extends Controller
 {
     public function index()
     {
-        $title = "Data Departement";
-        $departements = Departements::orderBy('id', 'asc')->paginate(5);
-        return view('departements.index', compact(['departements', 'title']));
+        $title = 'Data Departments';
+        $departements = Departements::orderBy('id','Asc')->paginate(5);
+        $managers = User::where('position','1')->get();
+        return view('departements.index', compact('departements','managers', 'title'));
     }
 
     public function create()
     {
-        $title = "Tambah Data Departement";
-        return view('departements.create', compact('title'));
+        $title = "Tambah data";
+        $managers = User::where('position', 'manager')->get();
+        return view('departements.create', compact('managers', 'title'));
     }
+
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
-            'location',
-            'manager_id',
+            'location' => 'nullable',
+            'manager_id' => 'required',
         ]);
 
-        Departements::create($request->post());
+        Departements::create($validatedData);
 
-        return redirect()->route('departements.index')->with('success', 'Departement has been created successfully.');
+        return redirect()->route('departements.index')->with('success', 'Departement created successfully.');
     }
 
 
@@ -42,28 +46,32 @@ class DepartementController extends Controller
 
     public function edit(Departements $departement)
     {
-        $title = "Edit Data Departement";
-        return view('departements.edit', compact(['departement', 'title']));
+        $title = 'Edit Departments';
+        $managers = User::where('position','1')->get();
+        return view('departements.edit',compact('departement' ,'managers', 'title'));
     }
-
 
     public function update(Request $request, Departements $departement)
     {
         $request->validate([
             'name' => 'required',
-            'location',
-            'manager_id'
+            'location' => 'required',
+            'manager_id' => 'required',
         ]);
-
+        
         $departement->fill($request->post())->save();
 
-        return redirect()->route('departements.index')->with('success', 'Departement Has Been updated successfully');
+        return redirect()->route('departements.index')->with('success','Departement Has Been updated successfully');
     }
-
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Departements  $departements
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Departements $departement)
     {
         $departement->delete();
-        return redirect()->route('departements.index')->with('success', 'Departement has been deleted successfully');
+        return redirect()->route('departements.index')->with('success', 'departements has been deleted successfully');
     }
 }

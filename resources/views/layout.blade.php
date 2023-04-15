@@ -8,13 +8,17 @@
   </head>
   <body>
 <div class="container-fluid">
-    <div class="card">
-        <div class="card-body text-center">
-            <h1 class="card-title">@yield('title', $title)</h1>
-            @yield('content')
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center">@yield('title', $title)</h1>
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
   </body>
 </html>

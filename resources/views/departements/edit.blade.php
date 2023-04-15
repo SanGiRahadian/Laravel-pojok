@@ -22,19 +22,25 @@
                 @enderror
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <label for="manager_id" class="form-label">Manager Id</label>
-            <select id="manager_id" name="manager_id" class="form-select">
-                <option selected>Choose...</option>
-                <option value="0" <?php if (!empty($_GET['id'])) {
-                                        if ($usr['manager_id'] == 0) {
-                                            echo "User";
-                                        } else {
-                                            echo "";
-                                        }
-                                    } ?>>User</option>
-            </select>
-            <button type="submit" class="btn btn-primary mt-3 ml-3">Submit</button>
+         <div class="col-xs-12 col-sm-12 col-md-12">
+              <div class="form-group">
+                  <strong>Manager ID:</strong>
+                  <select name="manager_id" class="form-control">
+                      @foreach ($managers as $manager)
+                        <option value="{{ $manager->id }}" @if($manager->id == $departement->manager_id) selected="selected" @endif>{{$manager->name}}</option>
+                      @endforeach
+                  </select>
+                  @error('manager_id')
+                  <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                  @enderror
+              </div>
+          </div>
+          <div class="col-lg-12 margin-tb">
+            <div class="text-end mb-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a class="btn btn-warning text-end" href="{{ route('departements.index') }}"> Back</a>
+            </div>
+          </div>
         </div>
 </form>
 @endsection
