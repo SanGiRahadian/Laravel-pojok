@@ -17,7 +17,7 @@
       <th scope="col">No</th>
       <th scope="col">Nama</th>
       <th scope="col">Location</th>
-      <th scope="col">Id Manager</th>
+      <th scope="col">Manager Name</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -28,12 +28,12 @@
       <td>{{ $no ++ }}</td>
       <td>{{ $data->name }}</td>
       <td>{{ $data->location }}</td>
-      <td>
-    @if($data->manager)
-      {{ $data->manager->name }}
-    @else
-      Tidak ada manager
-    @endif
+      <td>{{
+    (isset($data->manager->email)) ?
+      $data->manager->email :
+    
+      'Tidak ada manager'
+}}
   </td>
       <td>
         <form action="{{ route('departements.destroy',$data->id) }}" method="Post">

@@ -25,9 +25,12 @@
          <div class="col-xs-12 col-sm-12 col-md-12">
               <div class="form-group">
                   <strong>Manager ID:</strong>
-                  <select name="manager_id" class="form-control">
+                  <select name="manager_id" id="manager_id" class="form-control">
+                    <option value="" > Pilih</option>
+                  
                       @foreach ($managers as $manager)
-                        <option value="{{ $manager->id }}" @if($manager->id == $departement->manager_id) selected="selected" @endif>{{$manager->name}}</option>
+                        <option value="{{ $manager->id }}" @if($manager->id == $departement->manager_id) 
+                            selected="selected" @endif>{{$manager->name}}</option>
                       @endforeach
                   </select>
                   @error('manager_id')
