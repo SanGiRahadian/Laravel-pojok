@@ -8,10 +8,11 @@
 </div>
 @endif
 <div class="text-end mb-2">
+  <a class="btn btn-light" href="{{ route('exportPdf')}}">Export Pdf</a>
   <a class="btn btn-success" href="{{ route('departements.create') }}"> Create Departement</a>
 </div>
 
-<table class="table">
+<table id="example" class="table table-striped" style="width:100%">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -47,4 +48,11 @@
     @endforeach
   </tbody>
 </table>
+@endsection
+@section ('js')
+<script>
+  $(document).ready(function () {
+    $('#example').DataTable();
+});
+</script>
 @endsection

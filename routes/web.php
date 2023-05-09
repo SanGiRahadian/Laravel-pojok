@@ -33,6 +33,7 @@ Route::middleware('auth')->group(
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
     //route position
     Route::resource('positions', PositionController::class);
+    Route::get('departement/export-pdf', [DepartementController::class, 'exportPdf'])->name('exportPdf');
     //route departement
     Route::resource('departements', DepartementController::class);
 });

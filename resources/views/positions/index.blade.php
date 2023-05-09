@@ -10,8 +10,8 @@
 <form method="post" action="/index">
                         @csrf
 							        <div class="input-group mb-4">
-							            <input type="text" placeholder="Cari Nama Position..." required class="form-control" name="keyword">
-							            <button type="submit" class="btn btn-primary">Cari</button>
+							            <input  type="text" placeholder="Cari Nama Position..." required class="form-control" name="keyword">
+							            <button href="#" type="submit" class="btn btn-primary">Cari</button>
 							        </div>
 							    </form>
 <a class="btn btn-success" href="{{ route('positions.create') }}"> Add position</a>
