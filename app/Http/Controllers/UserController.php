@@ -155,6 +155,8 @@ class UserController extends Controller
         $user = User::orderBy('id', 'asc')->get();
 
         $pdf = PDF::loadview('users.pdf', compact(['user', 'title']));
-        return $pdf->stream('laporan-user-pdf');
+        return $pdf->download('laporan-user.pdf');
     }
 }
+//->stream for show
+//->download for download

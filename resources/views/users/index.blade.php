@@ -1,3 +1,5 @@
+<?php use App\Models\User; ?>
+
 @extends('app')
 @section('content')
 @if(session('success'))
@@ -17,7 +19,6 @@
             <th scope="col">#</th>
             <th scope="col">Nama</th>
             <th scope="col">Email</th>
-            <th scope="col">Password</th>
             <th scope="col">Position</th>
             <th scope="col">Departement</th>
             <th width="280px">Action</th>
@@ -29,8 +30,17 @@
         <td>{{ $data->id }}</td>
         <td>{{ $data->name }}</td>
         <td>{{ $data->email }}</td>
-        <td>{{ $data->password }}</td>
-        <td>{{ $data->position }}</td>
+        <td>
+        @if ($data->position == 1)
+        Manager
+        @elseif ($data->position == 2)
+        Karyawan 
+        @elseif ($data->position == 3)
+        Magang
+        @else 
+        Not Foound
+        @endif
+        </td>
         <td>{{ $data->name }}</td>
         <!-- <td>{{ 
             (isset($data->getManager->name)) ?
