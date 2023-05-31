@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController; // untuk mendaftarkan user controler
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\PasienController;
+use App\Http\Controllers\DokterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,5 +45,12 @@ Route::middleware('auth')->group(
         //route excel
         Route::get('position/export-excel', [PositionController::class, 'exportExcel'])->name('position.exportExcel');
    
+        //route pasien
+        Route::resource('pasiens', PasienController::class);
+
+        //route dokter
+        Route::resource('dokters', DokterController::class);
+        
+        //route resep
     }
 );

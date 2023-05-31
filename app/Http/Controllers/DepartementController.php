@@ -87,3 +87,4 @@ class DepartementController extends Controller
 }
 //->stream for show
 //->download for download
+ 

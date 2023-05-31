@@ -70,13 +70,17 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Link
+                            Master
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Data 1</a></li>
-                            <li><a class="dropdown-item" href="#">Data 2</a></li>
-                            <li><a class="dropdown-item" href="#">Data 3</a></li>
+                        
+                            <li class="nav-item">
+                            <a class="nav-link" href="{{route('pasiens.index')}}">Pasien</a>
+                          </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="{{route('dokters.index')}}">Dokter</a>
+                          </li>
+                            
 
                         </ul>
                     </li>
