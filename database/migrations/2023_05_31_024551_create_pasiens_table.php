@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('alamat');
-            $table->string('dokter');
-            $table->string('jenispenyakit');
+            $table->string('name')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('dokter')->nullable();
+            $table->string('jenispenyakit')->nullable();
             $table->timestamps();
         });
     }

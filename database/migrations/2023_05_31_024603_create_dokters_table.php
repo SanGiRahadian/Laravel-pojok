@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('dokters', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('alamat');
-            $table->string('spesialisasi');
+            $table->string('name')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('spesialis')->nullable();
+            $table->date('tgl_mulai_tugas')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

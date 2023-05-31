@@ -52,5 +52,9 @@ Route::middleware('auth')->group(
         Route::resource('dokters', DokterController::class);
         
         //route resep
+        Route::resource('reseps', ResepController::class);
+
+        Route::get('search/pasien', [ObatController::class, 'autocomplete'])->name('search.pasien');
+
     }
 );

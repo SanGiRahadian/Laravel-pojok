@@ -19,6 +19,8 @@ class DokterController extends Controller
     public function create()
     {
         $title = "Tambah Data Dokter";
+        $managers = Dokter::where('position', '1')->get();
+        $managers = Pasien::where('position', '1')->get();
         return view('dokters.create', compact('title'));
     }
 
