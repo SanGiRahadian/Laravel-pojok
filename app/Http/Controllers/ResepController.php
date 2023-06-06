@@ -1,27 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Dokters;
+use App\Models\User;
+use App\Models\Reseps;
+use App\Models\Pasiens;
 use Illuminate\Http\Request;
 use App\Exports\ExportPositions;
 use Maatwebsite\Excel\Facades\Excel;
 
-class DokterController extends Controller
+class ResepController extends Controller
 {
     public function index()
     {
-        $title = "Data Dokter";
-        $dokters = Dokters::orderBy('id','Asc')->get();
-        return view('dokters.index', compact(['dokters', 'title']));
+        $title = "Data Resep";
+        $reseps = Reseps::orderBy('id','Asc')->get();
+        return view('reseps.index', compact(['reseps', 'title']));
     }
 
     public function create()
     {
-        $title = "Tambah Data Dokter";
-        $managers = Dokter::where('position', '1')->get();
+        $title = "Tambah Data Resep";
+        $managers = resep::where('position', '1')->get();
         $managers = Pasien::where('position', '1')->get();
-        return view('dokters.create', compact('title'));
+        return view('pasiens.create', compact('title'));
     }
 
     public function store(Request $request)
@@ -34,46 +35,46 @@ class DokterController extends Controller
             'status',
         ]);
 
-        Dokters::create($request->post());
+        Reseps::create($request->post());
 
-        return redirect()->route('dokters.index')->with('success', 'Dokter has been created successfully.');
+        return redirect()->route('reseps.index')->with('success', 'Resep has been created successfully.');
     }
 
 
-    public function show(Dokters $dokter)
+    public function show(Reseps $resep)
     {
-        return view('dokters.show', compact('dokter'));
+        return view('reseps.show', compact('resep'));
     }
 
 
-    public function edit(Dokters $dokter)
+    public function edit(Reseps $resep)
     {
-        $title = "Edit Data Dokter";
-        $dokters = Dokters::orderBy('id', 'asc')->paginate(5);
-        return view('dokters.edit', compact(['dokter', 'title']));
+        $title = "Edit Data resep";
+        $reseps = Reseps::orderBy('id', 'asc')->paginate(5);
+        return view('reseps.edit', compact(['resep', 'title']));
     }
 
 
-    public function update(Request $request, Dokters $dokter)
+    public function update(Request $request, Reseps $resep)
     {
         $request->validate([
-            'name' => 'required',
-            'alamat',
-            'spesialis',
-            'tgl_mulai_tugas',
+            'no_resep' => 'required',
+            'nama_pasien',
+            'nama_dokter',
+            'tgl',
             'status',
         ]);
 
-        $dokter->fill($request->post())->save();
+        $resep->fill($request->post())->save();
 
-        return redirect()->route('dokters.index')->with('success', 'Dokter Has Been updated successfully');
+        return redirect()->route('reseps.index')->with('success', 'Resep Has Been updated successfully');
     }
 
 
-    public function destroy(Dokters $dokter)
+    public function destroy(Reseps $resep)
     {
-        $dokter->delete();
-        return redirect()->route('dokters.index')->with('success', 'Dokter has been deleted successfully');
+        $resep->delete();
+        return redirect()->route('reseps.index')->with('success', 'Resep has been deleted successfully');
     }
     public function exportExcel()
     {

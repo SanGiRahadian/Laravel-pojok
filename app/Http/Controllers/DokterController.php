@@ -75,6 +75,6 @@ class DokterController extends Controller
     }
     public function exportExcel()
     {
-        return Excel::download(new ExportPositions, 'positions.xlsx');
+        return Excel::download(new ExportPositions, 'dokters.xlsx');
     }
 }

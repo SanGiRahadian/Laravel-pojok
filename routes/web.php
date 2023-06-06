@@ -56,5 +56,7 @@ Route::middleware('auth')->group(
 
         Route::get('search/pasien', [ObatController::class, 'autocomplete'])->name('search.pasien');
 
+
+
     }
 );

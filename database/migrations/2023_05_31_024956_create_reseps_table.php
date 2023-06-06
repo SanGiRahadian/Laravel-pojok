@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('reseps', function (Blueprint $table) {
             $table->id();
+            $table->string('no_resep')->nullable();
             $table->string('nama_pasien')->nullable();
             $table->string('nama_dokter')->nullable();
             $table->date('tgl')->nullable();
-
+            $table->string('penyusun')->nullable();
             $table->timestamps();
         });
     }
