@@ -6,6 +6,7 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\RESEPController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +56,11 @@ Route::middleware('auth')->group(
         Route::resource('reseps', ResepController::class);
 
         Route::get('search/pasien', [ObatController::class, 'autocomplete'])->name('search.pasien');
-
+        Route::resource('reseps', RESEPController::class);
+        Route::get('search/pasien', [ProductController::class, 'autocomplete'])->name('search.product');
+        Route::resource('products', PasienController::class);
+        Route::get('chart-line', [RESEPController::class, 'chartLine'])->name ('reseps.chartLineAjax');
+        Route::get('chart-line-ajax', [RESEPController::class, 'chartLineAjax']);
 
 
     }

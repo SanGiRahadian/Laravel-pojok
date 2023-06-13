@@ -17,9 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('no_resep')->nullable();
             $table->string('nama_pasien')->nullable();
+            $table->date('tgl_resep')->nullable();
+            $table->date('tgl_lahir')->nullable();
             $table->string('nama_dokter')->nullable();
-            $table->date('tgl')->nullable();
-            $table->string('penyusun')->nullable();
+            $table->string('no_sip')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('umur_pasien')->nullable();
+            $table->string('riwayat_alergi')->nullable();
+            $table->integer('penyusun')->nullable();
+            $table->integer('total')->nullable();
             $table->timestamps();
         });
     }

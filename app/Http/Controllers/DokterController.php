@@ -12,23 +12,26 @@ class DokterController extends Controller
     public function index()
     {
         $title = "Data Dokter";
-        $dokters = Dokters::orderBy('id','Asc')->get();
+        $dokters = Dokters::orderBy('id', 'asc')->paginate(5);
         return view('dokters.index', compact(['dokters', 'title']));
     }
 
     public function create()
     {
-        $title = "Tambah Data Dokter";
+        $title = "Tambah Data Position";
         return view('dokters.create', compact('title'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name_dokter' => 'required',
+            'no_sip',
+            'email',
+            'tgl_diterima',
+            'no_tlp',
             'alamat',
-            'spesialis',
-            'tgl_mulai_tugas',
+            'spesialisasi',
             'status',
         ]);
 
@@ -47,7 +50,6 @@ class DokterController extends Controller
     public function edit(Dokters $dokter)
     {
         $title = "Edit Data Dokter";
-        $dokters = Dokters::orderBy('id', 'asc')->paginate(5);
         return view('dokters.edit', compact(['dokter', 'title']));
     }
 
@@ -55,11 +57,13 @@ class DokterController extends Controller
     public function update(Request $request, Dokters $dokter)
     {
         $request->validate([
-            'name' => 'required',
+            'name_dokter' => 'required',
+            'no_sip',
+            'email',
+            'tgl_diterima',
+            'no_tlp',
             'alamat',
-            'spesialis',
-            'tgl_mulai_tugas',
-            'status',
+            'spesialisasi',
         ]);
 
         $dokter->fill($request->post())->save();
@@ -75,6 +79,6 @@ class DokterController extends Controller
     }
     public function exportExcel()
     {
-        return Excel::download(new ExportPositions, 'dokters.xlsx');
+        return Excel::download(new ExportPositions, 'positions.xlsx');
     }
 }

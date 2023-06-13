@@ -15,13 +15,24 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->nullable();
-            $table->string('alamat')->nullable();
-            $table->string('dokter')->nullable();
-            $table->string('jenispenyakit')->nullable();
+            $table->string('no_rekam_medis');
+            $table->string('name')->nullable;
+            $table->integer('nik')->nullable;
+            $table->date('tgl_lahir');
+            $table->date('tgl_masuk');
+            $table->string('penyakit');
+            $table->string('email');
+            $table->integer('tlp');
+            $table->string('alamat');
+            $table->string('jenis_kelamin');
+            $table->string('jenispenyakit');
+            $table->string('dokter');
+            $table->string('beratbadan');
+            $table->string('tinggibadan');
             $table->timestamps();
         });
     }
+   
 
     /**
      * Reverse the migrations.
@@ -33,4 +44,3 @@ return new class extends Migration
         Schema::dropIfExists('pasiens');
     }
 };
- 

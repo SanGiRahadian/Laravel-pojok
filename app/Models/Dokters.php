@@ -10,11 +10,12 @@ class Dokters extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'name' => 'required',
+        'no_sip',
+        'email',
+        'tgl_diterima',
+        'no_tlp',
         'alamat',
-        'spesialis',
-        'tgl_mulai_tugas',
-        'status',
-
+        'spesialisasi',
     ];
 }
