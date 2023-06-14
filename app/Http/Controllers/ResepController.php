@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 use App\Exports\ExportPositions;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Charts\ResepLineChart;
+use Illuminate\Database\Capsule\Manager;
 
 class RESEPController extends Controller
 {
     public function index()
     {
         $title = "Data Resep";
-        $reseps = RESEP::orderBy('id','Asc')->get();
+        $reseps = RESEP::orderBy('id','Asc')->get(25);
         return view('reseps.index', compact(['reseps', 'title']));
     }
 
@@ -22,7 +23,7 @@ class RESEPController extends Controller
     {
         $title = "Tambah Data Resep";
         $managers = User::where('position', '1')->orderBy('id','asc')->get();
-        return view('reseps.create', compact('title'));
+        return view('reseps.create', compact('managers','title'));
     }
 
     public function store(Request $request)
@@ -49,7 +50,6 @@ class RESEPController extends Controller
             for ($i=1; $i <= $request->jml; $i++) { 
                 $details = [
                     'no_resep' => $request->no_resep,
-                    'id_product' => $request['id_product'.$i],
                     'nama_obat' => $request['nama_obat'.$i],
                     'jenis_obat' => $request['jenis_obat'.$i],
                     'bentuk_obat' => $request['bentuk_obat'.$i],
@@ -76,7 +76,7 @@ class RESEPController extends Controller
     {
         $title = "Edit Data resep";
         $managers = User::where('position', '1')->orderBy('id','asc')->get();
-        $detail = RESEPDetail::where('no_trx', $resep->no_resep)->orderBy('id','asc')->get();
+        $detail = RESEPDetail::where('no_resep', $resep->no_resep)->orderBy('id','asc')->get();
         return view('reseps.edit', compact(['resep', 'title']));
     }
 
@@ -100,8 +100,7 @@ class RESEPController extends Controller
             RESEPDetail::where('no_resep', $resep->no_resep)->delete();
             for ($i=1; $i <= $request->jml; $i++) { 
                 $details = [
-                    'no_resep' => $request->no_trx,
-                    'id_product' => $request['id_product'.$i],
+                    'no_resep' => $request->no_resep,
                     'nama_obat' => $request['nama_obat'.$i],
                     'jenis_obat' => $request['jenis_obat'.$i],
                     'bentuk_obat' => $request['bentuk_obat'.$i],
@@ -147,18 +146,20 @@ class RESEPController extends Controller
     {
         $year = $request->has('year') ? $request->year : date('Y');
         $reseps = RESEP::select(\DB::raw("COUNT(*) as count"))
-                    ->whereYear('created_at', $year)
-                    ->groupBy(\DB::raw("Month(created_at)"))
+                    ->whereYear('tgl_resep', $year)
+                    ->groupBy(\DB::raw("Month(tgl_resep)"))
                     ->pluck('count');
   
         $chart = new ResepLineChart;
   
-        $chart->dataset('New User Register Chart', 'bar', $reseps)->options([
+        $chart->dataset('New RESEP Register Chart', 'bar', $reseps)->options([
                     'fill' => 'true',
                     'borderColor' => '#51C1C0'
                 ]);
   
         return $chart->api();
     }
+
 }
+
 

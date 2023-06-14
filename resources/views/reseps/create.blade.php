@@ -86,10 +86,24 @@
             </div>
         </div>
        
-    
+<div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Penyusun:</strong>
+                <select name="penyusun" id="penyusun" class="form-select" >
+                        <option value="">Pilih</option>
+                        @foreach($managers as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                </select>
+                @error('alias')
+                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+        
         <div class="row col-xs-12 col-sm-12 col-md-12 mt-3">
             <div class="col-md-10 form-group">
-                <input type="text" name="search" id="search" class="form-control" placeholder="Masukan Nama / Kode Product">
+                <input type="text" name="search" id="search" class="form-control" placeholder="Masukan Nama / Kode Obat">
                 @error('name')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
@@ -103,8 +117,7 @@
                 <thead>
                     <tr>
                     <th scope="col">#</th>
-                    <th scope="col">R/</th>
-                    <th scope="col">No Obat</th>
+                    <th scope="col">No Resep</th>
                     <th scope="col">Nama Obat</th>
                     <th scope="col">Jenis Obat</th>
                     <th scope="col">Bentuk Obat</th>
@@ -124,7 +137,7 @@
                 <div class="form-group">
                     <strong>Grand Total:</strong>
                     <input type="text" name="total" class="form-control" placeholder="Rp. 0">
-                    @error('tgl_rab')
+                    @error('tgl_resep')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
                 </div>
@@ -136,7 +149,7 @@
 @endsection
 @section('js')
 <script type="text/javascript">
-    var path = "{{ route('search.product') }}";
+    var path = "{{ route('search.obat') }}";
   
     $("#search").autocomplete({
         source: function( request, response ) {
@@ -157,7 +170,7 @@
            console.log($("input[name=jml]").val());
             if($("input[name=jml]").val() > 0){
                 for (let i = 1; i <=  $("input[name=jml]").val(); i++) {
-                    id = $("input[name=id_product"+i+"]").val();
+                    id = $("input[name=nama_obat"+i+"]").val();
                     if(id==ui.item.id){
                         alert(ui.item.value+' sudah ada!');
                         break;
@@ -172,7 +185,7 @@
         }
       });
       function add(id){
-        const path = "{{ route('reseps.index') }}/"+id;
+        const path = "{{ route('obats.index') }}/"+id;
         var html = "";
         var no=0;
         if($('#detail tr').length > no){
@@ -187,9 +200,11 @@
                 console.log(data);
                 no++;
                 html += '<tr>'+
-                            '<td>'+no+'<input type="hidden" name="id_product'+no+'" class="form-control" value="'+data.id+'"></td>'+
-                            '<td><input type="text" name="product_name'+no+'" class="form-control" value="'+data.name+'"></td>'+
-                             '<td><input type="text" name="price'+no+'" class="form-control" value="'+data.price+'"></td>'+
+                            '<td>'+no+'<input type="hidden" name="nama_obat'+no+'" class="form-control" value="'+data.id+'"></td>'+
+                         
+                             '<td><input type="text" name="jenis_obat'+no+'" class="form-control" value="'+data.jenis_obat+'"></td>'+
+                              '<td><input type="text" name="bentuk_obat'+no+'" class="form-control" value="'+data.bentuk_obat+'"></td>'+
+                             '<td><input type="text" name="aturan_minum'+no+'" class="form-control" value="'+data.aturan_minum+'"></td>'+
                             '<td><input type="text" name="price'+no+'" class="form-control" value="'+data.price+'"></td>'+
                             '<td><input type="text" name="qty'+no+'" class="form-control" oninput="sumQty('+no+', this.value)" value="1"></td>'+
                             '<td><input type="text" name="sub_total'+no+'" class="form-control"></td>'+
@@ -201,6 +216,7 @@
                }
           });       
     }
+    
     function sumQty(no, q){
         var price = $("input[name=price"+no+"]").val();
         var subtotal = q*parseInt(price);

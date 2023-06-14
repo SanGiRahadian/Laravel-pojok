@@ -8,7 +8,7 @@
 </div>
 @endif
 <div class="text-end mb-2">
-<a class="btn btn-secondary" href="{{ route('rabs.create') }}"> Add Departement</a>
+<a class="btn btn-secondary" href="{{ route('reseps.create') }}"> Add Departement</a>
 </div>
 <table id="example" class="table table-striped" style="width:100%">
   <thead>
@@ -23,7 +23,7 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($rabs as $data)
+    @foreach ($reseps as $data)
     <tr>
         <td>{{ $data->id }}</td>
         <td>{{ $data->no_trx }}</td>
@@ -37,8 +37,8 @@
         <td>{{ $data->detail->count() }}</td>
         <td>{{ $data->total }}</td>
         <td>
-            <form action="{{ route('rabs.destroy',$data->id) }}" method="Post">
-                <a class="btn btn-primary" href="{{ route('rabs.edit',$data->id) }}">Edit</a>
+            <form action="{{ route('reseps.destroy',$data->id) }}" method="Post">
+                <a class="btn btn-primary" href="{{ route('reseps.edit',$data->id) }}">Edit</a>
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>

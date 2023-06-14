@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Dokters extends Model
+class RESEPDetail extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'no_resep',
-        'id_product' ,
-        'nama_obat',
         'jenis_obat',
         'bentuk_obat' ,
         'aturan_minum',      
@@ -23,7 +21,7 @@ class Dokters extends Model
     
         public function getProduct()
         {
-            return $this->belongsTo(Product::class, 'id_product', 'id');
+            return $this->belongsTo(Obat::class, 'nama_obat', 'id');
         }
         
     }

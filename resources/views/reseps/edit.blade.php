@@ -51,12 +51,16 @@
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name Product</th>
-                <th scope="col">Price</th>
-                <th scope="col">QTY</th>
-                <th scope="col">Sub Total</th>
-                <th scope="col">Action</th>
+                    <th scope="col">#</th>
+                    <th scope="col">No Resep</th>
+                    <th scope="col">Nama Obat</th>
+                    <th scope="col">Jenis Obat</th>
+                    <th scope="col">Bentuk Obat</th>
+                    <th scope="col">Aturan Minum</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">QTY</th>
+                    <th scope="col">Sub Total</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody id="detail">
@@ -65,7 +69,7 @@
                 <?php $no++?>
                 <tr>
                     <td>
-                        <input type="hidden" name="productId{{$no}}" class="form-control" value="{{$item->id_product}}">
+                        <input type="hidden" name="productId{{$no}}" class="form-control" value="{{$item->nama_obat}}">
                         <span>{{$no}}</span>
                     </td>
                     <td>

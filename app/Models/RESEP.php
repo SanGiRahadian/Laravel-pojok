@@ -18,8 +18,16 @@ class RESEP extends Model
         'no_sip' ,
         'alamat',
         'riwayat_alergi',
-        'tgl_pembuatan_resep',
         'penyusun',
-        'total'
+        'total',
     ];
+    public function detail()
+    {
+        return $this->hasMany(RABDetail::class, 'no_resep', 'no_resep');
+    }
+
+    public function getManager()
+    {
+        return $this->belongsTo(User::class, 'penyusun', 'id');
+    }
 }

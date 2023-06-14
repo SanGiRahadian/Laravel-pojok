@@ -13,19 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dokters', function (Blueprint $table) {
+        Schema::create('obats', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('no_sip')->nullable();
-            $table->string('email')->nullable();
-            $table->date('tgl_diterima')->nullable();
-            $table->string('alamat')->nullable();
-            $table->string('spesialisasi')->nullable();
-            $table->string('status')->nullable();
+            $table->string('price')->nullable();
             $table->timestamps();
         });
     }
-   
+
     /**
      * Reverse the migrations.
      *
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dokters');
+        Schema::dropIfExists('obats');
     }
 };
