@@ -70,12 +70,11 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">No Resep</th>
                     <th scope="col">Nama Obat</th>
                     <th scope="col">Jenis Obat</th>
                     <th scope="col">Bentuk Obat</th>
                     <th scope="col">Aturan Minum</th>
-                    <th scope="col">Harga</th>
+                    <th scope="col">Price</th>
                     <th scope="col">QTY</th>
                     <th scope="col">Sub Total</th>
                     <th scope="col">Action</th>
@@ -137,7 +136,7 @@
 <script type="text/javascript">
     var path = "{{ route('search.obat') }}";
   
-    $( "#search" ).autocomplete({
+    $("#search").autocomplete({
         source: function( request, response ) {
           $.ajax({
             url: path,
@@ -152,11 +151,11 @@
           });
         },
         select: function (event, ui) {
-           $('#search').val(ui.item.label);
-        //    console.log($("input[name=jml]").val());
+            $('#search').val(ui.item.label);
+           console.log($("input[name=jml]").val());
             if($("input[name=jml]").val() > 0){
                 for (let i = 1; i <=  $("input[name=jml]").val(); i++) {
-                    id = $("input[name=obatId"+i+"]").val();
+                    id = $("input[name=id_obat"+i+"]").val();
                     if(id==ui.item.id){
                         alert(ui.item.value+' sudah ada!');
                         break;
@@ -170,22 +169,20 @@
            return false;
         }
       });
-
-    function add(id){
-        // console.log(id);
+      function add(id){
         const path = "{{ route('obats.index') }}/"+id;
         var html = "";
         var no=0;
+        if($('#detail tr').length > no){
+            html = $('#detail').html();
+            no = no+$('#detail tr').length;
+        }
         $.ajax({
             url: path,
             type: 'GET',
             dataType: "json",
-            
             success: function( data ) {
-                if($('#detail tr').length > no){
-                    html = $('#detail').html();
-                    no = $('#detail tr').length;
-                }
+                console.log(data);
                 no++;
                 html+='<tr>'+
                         '<td>'+

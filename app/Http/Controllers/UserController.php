@@ -91,6 +91,7 @@ class UserController extends Controller
     {
         $title = "Data User";
         $user = User::orderBy('id', 'asc')->paginate();
+        $managers = User::where('position', '1')->get();
         return view('users.index', compact(['user', 'title']));
     }
 

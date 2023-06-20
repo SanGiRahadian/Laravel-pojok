@@ -42,12 +42,18 @@
         @endif
         </td>
         <td>{{ $data->name }}</td>
-        <!-- <td>{{ 
+      <td>{{ 
             (isset($data->getManager->name)) ?
             $data->getManager->name :
             'Tidak Ada'
             }}
-        </td> -->
+        </td> 
+        <td>{{ 
+            (isset($data->getPosition->name)) ?
+            $data->getPosition->name :
+            'Tidak Ada'
+            }}
+        </td>
         <td>
             <form action="{{ route('user.destroy',$data->id) }}" method="Post">
                 <a class="btn btn-primary" href="{{ route('user.edit',$data->id) }}">Edit</a>

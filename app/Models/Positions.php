@@ -9,4 +9,8 @@ class Positions extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'keterangan', 'alias'];
+    public function getManager()
+    {
+        return $this->belongsTo(User::class, 'manager_id', 'id');
+    }
 }

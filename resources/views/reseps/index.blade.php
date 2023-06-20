@@ -9,18 +9,12 @@
 @endif
 <div class="text-end mb-2">
 
- <a class="btn btn-warning" href="{{ route('reseps.chartLine') }}"> Chart</a>
 <a class="btn btn-secondary" href="{{ route('reseps.create') }}"> Add Resep</a>
 </div>
 <table id="example" class="table table-striped" style="width:100%">
   <thead>
     <tr>
-      <th scope="col">#</th>        
-      <th scope="col">No Resep</th>   
-      <th scope="col">Tanggal RESEP</th>
-      <th scope="col">Manager Name</th>
-
-      <th scope="col">Action</th>
+     
     </tr>
   </thead>
   <tbody>
