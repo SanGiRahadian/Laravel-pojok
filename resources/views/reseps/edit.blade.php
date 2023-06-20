@@ -1,41 +1,59 @@
 @extends('app')
 @section('content')
-<form action="{{ route('resep.update', $resep->id ) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('reseps.update', $resep->id ) }}" method="POST" enctype="multipart/form-data">
   @method('PUT')
   @csrf
   <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>No Resep:</strong>
+                <input type="text" name="no_resep" class="form-control" placeholder="No Resep">
+                @error('name')
+                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Tanggal Resep :</strong>
+                <input type="date" name="tgl_resep" class="form-control" placeholder="Tanggal Resep">
+                @error('tgl_resep')
+                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Nama Pasien:</strong>
+                <input type="text" name="nama_pasien" class="form-control" placeholder="Nama Pasien">
+                @error('name')
+                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
       <div class="col-xs-12 col-sm-12 col-md-12">
-          <div class="form-group">
-              <strong>NO RESEP:</strong>
-              <input type="text" name="no_trx" class="form-control" placeholder="NO RESEP" value="{{ $resep->no_trx }}" disabled>
-              @error('no_resep')
-              <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-              @enderror
-          </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-12">
-          <div class="form-group">
-              <strong>Tanggal RESEP:</strong>
-              <input type="date" name="tgl_resep" class="form-control" placeholder="Tanggal RESEP" value="{{ $resep->tgl_resep }}" >
-              @error('tgl_resep')
-              <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-              @enderror
-          </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-12">
-          <div class="form-group">
-              <strong>Penyusun :</strong>
-              <select name="penyusun" id="penyusun" class="form-select">
-                <option value="">Pilih</option>
-                @foreach ($managers as $item)
-                <option value="{{ $item->id }}" {{ ($item->id==$resep->penyusun)? 'selected': ''}}>{{ $item->name }}</option>
-                @endforeach
-              </select>
-              @error('id_penyusun')
-              <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-              @enderror
-          </div>
-      </div>
+            <div class="form-group">
+                <strong>Nama dokter:</strong>
+                <select name="name_dokter" id="name_dokter" class="form-select" >
+                        <option value="">Pilih</option>
+                        @foreach($managers as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                </select>
+                @error('alias')
+                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>No SIP:</strong>
+                <input type="text" name="no_sip" class="form-control" placeholder="No SIP">
+                @error('name')
+                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
       <div class="row col-xs-12 col-sm-12 col-md-12 mt-3">
           <div class="form-group col-10">
               <input type="text" name="search" id="search" class="form-control" placeholder="Masukan Nama Obat">
@@ -73,7 +91,7 @@
                         <span>{{$no}}</span>
                     </td>
                     <td>
-                        <input type="text" name="obatName{{$no}}" class="form-control" value="{{$item->getObat->data.name}}">
+                        <input type="text" name="name_obat{{$no}}" class="form-control" value="{{$item->name_obat}}">
                     </td>
                     <td>
                         <input type="text" name="jenis_obat{{$no}}" class="form-control" value="{{$item->jenis_obat}}" >
@@ -171,11 +189,11 @@
                 no++;
                 html+='<tr>'+
                         '<td>'+
-                            '<input type="hidden" name="obatId'+no+'" class="form-control" value="'+data.id+'">'+
+                            '<input type="hidden" name="id_obat'+no+'" class="form-control" value="'+data.id+'">'+
                             '<span>'+no+'</span>'+
                         '</td>'+
                         '<td>'+
-                            '<input type="text" name="obatName'+no+'" class="form-control" value="'+data.name+'" >'+
+                            '<input type="text" name="name_obat '+no+'" class="form-control" value="'+data.name+'" >'+
                         '</td>'+
                         '<td>'+
                             '<input type="text" name="price'+no+'" class="form-control" value="'+data.price+'" >'+

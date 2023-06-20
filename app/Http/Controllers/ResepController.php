@@ -96,7 +96,8 @@ class RESEPController extends Controller
             for ($i=1; $i <= $request->jml; $i++) { 
                 $details = [
                     'no_resep' => $request->no_resep,
-                    'id_obat' => $request['id_obat'.$i],
+                    'id_obat' => $request['obatId'.$i],
+                    'name_obat' => $request['name_obat'.$i],
                     'aturan_minum' => $request['aturan_minum'.$i],
                     'price' => $request['price'.$i],
                     'qty' => $request['qty'.$i],

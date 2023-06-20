@@ -62,6 +62,9 @@
                         <a class="nav-link active" aria-current="page" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{route('reseps.index')}}">Resep</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('positions.index') }}">Position</a>
                     </li>
                     <li class="nav-item">

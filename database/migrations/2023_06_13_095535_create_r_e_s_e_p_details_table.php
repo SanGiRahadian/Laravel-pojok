@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reseps_detail', function (Blueprint $table) {
+        Schema::create('r_e_s_e_p_details', function (Blueprint $table) {
             $table->id();
             $table->string('no_resep')->nullable();
             $table->integer('id_obat')->nullable();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reseps_detail');
+        Schema::dropIfExists('r_e_s_e_p_details');
     }
 };

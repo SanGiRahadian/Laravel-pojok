@@ -8,6 +8,8 @@
 </div>
 @endif
 <div class="text-end mb-2">
+
+ <a class="btn btn-warning" href="{{ route('reseps.chartLine') }}"> Chart</a>
 <a class="btn btn-secondary" href="{{ route('reseps.create') }}"> Add Resep</a>
 </div>
 <table id="example" class="table table-striped" style="width:100%">

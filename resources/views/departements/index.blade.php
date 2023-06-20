@@ -8,7 +8,8 @@
 </div>
 @endif
 <div class="text-end mb-2">
-  <a class="btn btn-light" href="{{ route('exportPdf')}}">Export Pdf</a>
+<a class="btn btn-light" href="{{ route('exportPdf')}}">Export Pdf</a>
+ <a class="btn btn-warning" href="{{ route('dokters.chartLine') }}"> Chart</a>
   <a class="btn btn-success" href="{{ route('departements.create') }}"> Create Departement</a>
 </div>
 
