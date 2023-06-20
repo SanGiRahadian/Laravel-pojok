@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('obats', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('name_obat')->nullable();
+            $table->string('jenis_obat')->nullable();
+            $table->string('bentuk_obat')->nullable();
+            $table->string('aturan_minum')->nullable();
             $table->string('price')->nullable();
             $table->timestamps();
         });

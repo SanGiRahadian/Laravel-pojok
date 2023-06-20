@@ -16,7 +16,7 @@
             <div class="form-group">
                 <strong>Tanggal Resep :</strong>
                 <input type="date" name="tgl_resep" class="form-control" placeholder="Tanggal Resep">
-                @error('location')
+                @error('tgl_resep')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -30,20 +30,16 @@
                 @enderror
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Tanggal Lahir :</strong>
-                <input type="date" name="tgl_lahir" class="form-control" placeholder="Tanggal Lahir">
-                @error('location')
-                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Nama Dokter:</strong>
-                <input type="text" name="nama_dokter" class="form-control" placeholder="Nama Dokter">
-                @error('name')
+                <strong>Nama dokter:</strong>
+                <select name="name_dokter" id="name_dokter" class="form-select" >
+                        <option value="">Pilih</option>
+                        @foreach($managers as $item)
+                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                </select>
+                @error('alias')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -57,54 +53,12 @@
                 @enderror
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Alamat:</strong>
-                <input type="text" name="alamat" class="form-control" placeholder="Alamat">
-                @error('name')
-                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Umur Pasien:</strong>
-                <input type="text" name="umur_pasien" class="form-control" placeholder="Umur Pasien">
-                @error('name')
-                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Riwayat Alergi:</strong>
-                <input type="text" name="riwayat_alergi" class="form-control" placeholder="Riwayat Alergi">
-                @error('name')
-                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-       
-<div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Penyusun:</strong>
-                <select name="penyusun" id="penyusun" class="form-select" >
-                        <option value="">Pilih</option>
-                        @foreach($managers as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endforeach
-                </select>
-                @error('alias')
-                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
+
         
         <div class="row col-xs-12 col-sm-12 col-md-12 mt-3">
             <div class="col-md-10 form-group">
                 <input type="text" name="search" id="search" class="form-control" placeholder="Masukan Nama / Kode Obat">
-                @error('name')
+                @error('name_obat')
                 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
             </div>
@@ -117,12 +71,11 @@
                 <thead>
                     <tr>
                     <th scope="col">#</th>
-                    <th scope="col">No Resep</th>
                     <th scope="col">Nama Obat</th>
                     <th scope="col">Jenis Obat</th>
                     <th scope="col">Bentuk Obat</th>
                     <th scope="col">Aturan Minum</th>
-                    <th scope="col">Harga</th>
+                    <th scope="col">Price</th>
                     <th scope="col">QTY</th>
                     <th scope="col">Sub Total</th>
                     <th scope="col">Action</th>
@@ -137,7 +90,7 @@
                 <div class="form-group">
                     <strong>Grand Total:</strong>
                     <input type="text" name="total" class="form-control" placeholder="Rp. 0">
-                    @error('tgl_resep')
+                    @error('name_obat')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
                 </div>
@@ -170,7 +123,7 @@
            console.log($("input[name=jml]").val());
             if($("input[name=jml]").val() > 0){
                 for (let i = 1; i <=  $("input[name=jml]").val(); i++) {
-                    id = $("input[name=nama_obat"+i+"]").val();
+                    id = $("input[name=id_obat"+i+"]").val();
                     if(id==ui.item.id){
                         alert(ui.item.value+' sudah ada!');
                         break;
@@ -200,11 +153,11 @@
                 console.log(data);
                 no++;
                 html += '<tr>'+
-                            '<td>'+no+'<input type="hidden" name="nama_obat'+no+'" class="form-control" value="'+data.id+'"></td>'+
-                         
-                             '<td><input type="text" name="jenis_obat'+no+'" class="form-control" value="'+data.jenis_obat+'"></td>'+
-                              '<td><input type="text" name="bentuk_obat'+no+'" class="form-control" value="'+data.bentuk_obat+'"></td>'+
-                             '<td><input type="text" name="aturan_minum'+no+'" class="form-control" value="'+data.aturan_minum+'"></td>'+
+                            '<td>'+no+'<input type="hidden" name="obatId'+no+'" class="form-control" value="'+data.id+'"></td>'+
+                            '<td><input type="text" name="name_obat'+no+'" class="form-control" value="'+data.name_obat+'"></td>'+
+                            '<td><input type="text" name="jenis_obat'+no+'" class="form-control" value="'+data.jenis_obat+'"></td>'+
+                            '<td><input type="text" name="bentuk_obat'+no+'" class="form-control" value="'+data.bentuk_obat+'"></td>'+
+                            '<td><input type="text" name="aturan_minum'+no+'" class="form-control" value="'+data.aturan_minum+'"></td>'+
                             '<td><input type="text" name="price'+no+'" class="form-control" value="'+data.price+'"></td>'+
                             '<td><input type="text" name="qty'+no+'" class="form-control" oninput="sumQty('+no+', this.value)" value="1"></td>'+
                             '<td><input type="text" name="sub_total'+no+'" class="form-control"></td>'+

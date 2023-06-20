@@ -16,9 +16,7 @@ return new class extends Migration
         Schema::create('reseps_detail', function (Blueprint $table) {
             $table->id();
             $table->string('no_resep')->nullable();
-            $table->string('nama_obat')->nullable();
-            $table->string('jenis_obat')->nullable();
-            $table->string('bentuk_obat')->nullable();
+            $table->integer('id_obat')->nullable();
             $table->string('aturan_minum')->nullable();
             $table->integer('price')->nullable();
             $table->integer('qty')->nullable();

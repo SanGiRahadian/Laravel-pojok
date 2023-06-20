@@ -13,17 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reseps', function (Blueprint $table) {
+        Schema::create('r_e_s_e_p_s', function (Blueprint $table) {
             $table->id();
             $table->string('no_resep')->nullable();
             $table->string('nama_pasien')->nullable();
             $table->date('tgl_resep')->nullable();
-            $table->date('tgl_lahir')->nullable();
-            $table->string('nama_dokter')->nullable();
+            $table->integer('name_dokter')->nullable();
             $table->string('no_sip')->nullable();
-            $table->string('alamat')->nullable();
-            $table->string('umur_pasien')->nullable();
-            $table->string('riwayat_alergi')->nullable();
             $table->integer('penyusun')->nullable();
             $table->integer('total')->nullable();
             $table->timestamps();

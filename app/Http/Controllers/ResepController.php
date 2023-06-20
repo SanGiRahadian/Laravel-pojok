@@ -15,7 +15,7 @@ class RESEPController extends Controller
     public function index()
     {
         $title = "Data Resep";
-        $reseps = RESEP::orderBy('id','Asc')->get(25);
+        $reseps = RESEP::orderBy('id','Asc')->get();
         return view('reseps.index', compact(['reseps', 'title']));
     }
 
@@ -37,38 +37,37 @@ class RESEPController extends Controller
             'no_resep' => $request->no_resep,
             'nama_pasien' => $request->nama_pasien,
             'tgl_resep'=> $request->tgl_resep,
-            'tgl_lahir'=> $request->tgl_lahir,
             'name_dokter' => $request->name_dokter,
             'no_sip'=> $request->no_sip,
-            'alamat'=> $request->alamat,
-            'umur_pasien'=> $request->umur_pasien,
-            'riwayat_alergi'=> $request->riwayat_alergi,
             'penyusun' => $request->penyusun,
-            'total' => $request->total,
+            'total' => $request->total
+
         ];
         if($result = RESEP::create($resep)){
             for ($i=1; $i <= $request->jml; $i++) { 
                 $details = [
                     'no_resep' => $request->no_resep,
-                    'nama_obat' => $request['nama_obat'.$i],
-                    'jenis_obat' => $request['jenis_obat'.$i],
-                    'bentuk_obat' => $request['bentuk_obat'.$i],
+                    'id_obat' => $request['id_obat'.$i],
+                    
                     'aturan_minum' => $request['aturan_minum'.$i],
                     'price' => $request['price'.$i],
                     'qty' => $request['qty'.$i],
                     'sub_total' => $request['sub_total'.$i],
                 ];
+                
+            
                 RESEPDetail::create($details);
             }
-            
+           
         }
         return redirect()->route('reseps.index')->with('success', 'Resep has been created successfully.');
     }
 
 
+
     public function show(RESEP $reseps)
     {
-        return view('reseps.show', compact('resep'));
+        return view('reseps.show', compact('Departement'));
     }
 
 
@@ -77,7 +76,7 @@ class RESEPController extends Controller
         $title = "Edit Data resep";
         $managers = User::where('position', '1')->orderBy('id','asc')->get();
         $detail = RESEPDetail::where('no_resep', $resep->no_resep)->orderBy('id','asc')->get();
-        return view('reseps.edit', compact(['resep', 'title']));
+        return view('reseps.edit',compact('resep' , 'title', 'managers', 'detail'));
     }
 
 
@@ -87,23 +86,17 @@ class RESEPController extends Controller
             'no_resep' => $request->no_resep,
             'nama_pasien' => $request->nama_pasien,
             'tgl_resep'=> $request->tgl_resep,
-            'tgl_lahir'=> $request->tgl_lahir,
             'name_dokter' => $request->name_dokter,
             'no_sip'=> $request->no_sip,
-            'alamat'=> $request->alamat,
-            'umur_pasien'=> $request->umur_pasien,
-            'riwayat_alergi'=> $request->riwayat_alergi,
             'penyusun' => $request->penyusun,
-            'total' => $request->total,
+            
         ];
         if($resep->fill($reseps)->save()){
             RESEPDetail::where('no_resep', $resep->no_resep)->delete();
             for ($i=1; $i <= $request->jml; $i++) { 
                 $details = [
                     'no_resep' => $request->no_resep,
-                    'nama_obat' => $request['nama_obat'.$i],
-                    'jenis_obat' => $request['jenis_obat'.$i],
-                    'bentuk_obat' => $request['bentuk_obat'.$i],
+                    'id_obat' => $request['id_obat'.$i],
                     'aturan_minum' => $request['aturan_minum'.$i],
                     'price' => $request['price'.$i],
                     'qty' => $request['qty'.$i],
@@ -128,14 +121,15 @@ class RESEPController extends Controller
     }
 
     public function chartLine()
-    {
-        $api = url(route('reseps.chartLineAjax'));
-   
-        $chart = new ResepLineChart;
-        $chart->labels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])->load($api);
-          $title = "Chart Ajax";
-        return view('home', compact('chart', 'title'));
-    }
+{
+    $api = route('reseps.chartLineAjax');
+
+    $chart = new ResepLineChart;
+    $chart->labels(['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])->load($api);
+    $title = "Chart Ajax";
+    return view('home', compact('chart', 'title'));
+}
+
    
     /**
      * The attributes that are mass assignable.

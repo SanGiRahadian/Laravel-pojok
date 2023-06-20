@@ -10,6 +10,7 @@
     <link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
   
+  
     <!-- Favicon -->
 
     <link rel="icon" href="https://laravel.spruko.com/dashfox/ltr/assets/img/brand/favicon.png" type="image/x-icon" />
@@ -77,11 +78,9 @@
                         <ul class="dropdown-menu">
                         
                             <li class="nav-item">
-                            <a class="nav-link" href="{{route('pasiens.index')}}">Pasien</a>
+                            <a class="nav-link" href="{{route('reseps.index')}}">Pasien</a>
                           </li>
-                            <li class="nav-item">
-                            <a class="nav-link" href="{{route('dokters.index')}}">Dokter</a>
-                          </li>
+                           
                             
 
                         </ul>

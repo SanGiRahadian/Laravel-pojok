@@ -11,18 +11,17 @@ class RESEPDetail extends Model
 
     protected $fillable = [
         'no_resep',
-        'jenis_obat',
-        'bentuk_obat' ,
+        'id_obat',
         'aturan_minum',      
-         'price' ,
+        'price' ,
         'qty' ,
         'sub_total' ,
         ];
     
-        public function getProduct()
+        public function getObat()
         {
-            return $this->belongsTo(Obat::class, 'nama_obat', 'id');
+            return $this->belongsTo(Obat::class, 'id_obat', 'id');
         }
-        
+      
     }
     

@@ -8,17 +8,16 @@
 </div>
 @endif
 <div class="text-end mb-2">
-<a class="btn btn-secondary" href="{{ route('reseps.create') }}"> Add Departement</a>
+<a class="btn btn-secondary" href="{{ route('reseps.create') }}"> Add Resep</a>
 </div>
 <table id="example" class="table table-striped" style="width:100%">
   <thead>
     <tr>
       <th scope="col">#</th>        
-      <th scope="col">NO TRX</th>   
-      <th scope="col">Tanggal RAB</th>
+      <th scope="col">No Resep</th>   
+      <th scope="col">Tanggal RESEP</th>
       <th scope="col">Manager Name</th>
-      <th scope="col">Jumlah</th>
-      <th scope="col">Total</th>
+
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -26,16 +25,14 @@
     @foreach ($reseps as $data)
     <tr>
         <td>{{ $data->id }}</td>
-        <td>{{ $data->no_trx }}</td>
-        <td>{{ $data->tgl_rab }}</td>
+        <td>{{ $data->no_resep }}</td>
+        <td>{{ $data->tgl_resep }}</td>
         <td>{{ 
           (isset($data->getManager->name)) ? 
           $data->getManager->name : 
           'Tidak Ada'
           }}
         </td>
-        <td>{{ $data->detail->count() }}</td>
-        <td>{{ $data->total }}</td>
         <td>
             <form action="{{ route('reseps.destroy',$data->id) }}" method="Post">
                 <a class="btn btn-primary" href="{{ route('reseps.edit',$data->id) }}">Edit</a>
